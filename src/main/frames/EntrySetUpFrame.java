@@ -28,14 +28,29 @@ public class EntrySetUpFrame extends JFrame implements ActionListener {
 
     public EntrySetUpFrame(Data data) {
         this.data = data;
+        SpringLayout layout = new SpringLayout();
+        Container container = getContentPane();
         Font font = new Font("Segoe UI Emoji", Font.PLAIN, 18);
         JLabel instructions = new JLabel("Enter today's data: ");
         instructions.setFont(new Font ("Segoe UI Emoji", Font.PLAIN, 20));
+        layout.putConstraint(SpringLayout.WEST, instructions, 5, SpringLayout.WEST, container);
+        layout.putConstraint(SpringLayout.NORTH, instructions, 10, SpringLayout.NORTH, container);
         add(instructions);
 
-        JLabel weatherNote = new JLabel("Select weather for entry: ");
+        JLabel weatherNote = new JLabel("Select weather: ");
         weatherNote.setFont(font);
+        layout.putConstraint(SpringLayout.WEST, weatherNote, 5, SpringLayout.WEST, container);
+        layout.putConstraint(SpringLayout.NORTH, weatherNote, 35, SpringLayout.NORTH, container);
         add(weatherNote);
+
+        String[] weatherStrings = {"-----------", "Rain", "Sun", "Snow"};
+        weatherBox = new JComboBox(weatherStrings);
+        weatherBox.setFont(font);
+        weatherBox.setSelectedIndex(0);
+        layout.putConstraint(SpringLayout.WEST, weatherBox, 130, SpringLayout.WEST, container);
+        layout.putConstraint(SpringLayout.NORTH, weatherBox, 30, SpringLayout.NORTH, container);
+        add(weatherBox);
+        weatherBox.addActionListener(this);
 
         JComboBox.KeySelectionManager hourKey = new JComboBox.KeySelectionManager() {
             @Override
@@ -63,16 +78,10 @@ public class EntrySetUpFrame extends JFrame implements ActionListener {
             }
         };
 
-        String[] weatherStrings = {"-----------", "Rain", "Sun", "Snow"};
-        weatherBox = new JComboBox(weatherStrings);
-        weatherBox.setFont(font);
-        weatherBox.setSelectedIndex(0);
-        add(weatherBox);
-        weatherBox.addActionListener(this);
-
-
-        JLabel startTime = new JLabel("Enter departure time");
+        JLabel startTime = new JLabel("Enter departure time: ");
         startTime.setFont(font);
+        layout.putConstraint(SpringLayout.WEST, startTime, 5, SpringLayout.WEST, container);
+        layout.putConstraint(SpringLayout.NORTH, startTime, 65, SpringLayout.NORTH, container);
         add(startTime);
 
         String[] startHour = new String[25];
@@ -81,12 +90,16 @@ public class EntrySetUpFrame extends JFrame implements ActionListener {
         startHourBox = new JComboBox(startHour);
         startHourBox.setFont(font);
         startHourBox.setSelectedIndex(0);
+        layout.putConstraint(SpringLayout.WEST, startHourBox, 100, SpringLayout.WEST, container);
+        layout.putConstraint(SpringLayout.NORTH, startHourBox, 85, SpringLayout.NORTH, container);
         add(startHourBox);
         startHourBox.addActionListener(this);
         startHourBox.setKeySelectionManager(hourKey);
 
         JLabel colon = new JLabel(":");
         colon.setFont(font);
+        layout.putConstraint(SpringLayout.WEST, colon, 162, SpringLayout.WEST, container);
+        layout.putConstraint(SpringLayout.NORTH, colon, 90, SpringLayout.NORTH, container);
         add(colon);
 
         String[] startMin = new String[61];
@@ -95,12 +108,17 @@ public class EntrySetUpFrame extends JFrame implements ActionListener {
         startMinBox = new JComboBox(startMin);
         startMinBox.setFont(font);
         startMinBox.setSelectedIndex(0);
+        layout.putConstraint(SpringLayout.WEST, startMinBox, 180, SpringLayout.WEST, container);
+        layout.putConstraint(SpringLayout.NORTH, startMinBox, 85, SpringLayout.NORTH, container);
         add(startMinBox);
         startMinBox.addActionListener(this);
         startMinBox.setKeySelectionManager(minKey);
 
-        JLabel endTime = new JLabel("Enter arrival time");
+        JLabel endTime = new JLabel("Enter arrival time: ");
         endTime.setFont(font);
+        layout.putConstraint(SpringLayout.WEST, endTime, 5, SpringLayout.WEST, container);
+        layout.putConstraint(SpringLayout.NORTH, endTime, 120, SpringLayout.NORTH, container);
+
         add(endTime);
 
         String[] endHour = new String[25];
@@ -110,11 +128,15 @@ public class EntrySetUpFrame extends JFrame implements ActionListener {
         endHourBox.setFont(font);
         endHourBox.setSelectedIndex(0);
         add(endHourBox);
+        layout.putConstraint(SpringLayout.WEST, endHourBox, 100, SpringLayout.WEST, container);
+        layout.putConstraint(SpringLayout.NORTH, endHourBox, 140, SpringLayout.NORTH, container);
         endHourBox.addActionListener(this);
         endHourBox.setKeySelectionManager(hourKey);
 
         JLabel colon2 = new JLabel(":");
         colon2.setFont(font);
+        layout.putConstraint(SpringLayout.WEST, colon2, 162, SpringLayout.WEST, container);
+        layout.putConstraint(SpringLayout.NORTH, colon2, 145, SpringLayout.NORTH, container);
         add(colon2);
 
         String[] endMin = new String[61];
@@ -123,26 +145,36 @@ public class EntrySetUpFrame extends JFrame implements ActionListener {
         endMinBox = new JComboBox(endMin);
         endMinBox.setFont(font);
         endMinBox.setSelectedIndex(0);
+        layout.putConstraint(SpringLayout.WEST, endMinBox, 180, SpringLayout.WEST, container);
+        layout.putConstraint(SpringLayout.NORTH, endMinBox, 140, SpringLayout.NORTH, container);
         add(endMinBox);
         endMinBox.addActionListener(this);
         endMinBox.setKeySelectionManager(minKey);
 
         JLabel format = new JLabel("**Arrival time must be after departure time**");
         format.setFont(new Font("Segoe UI Emoji", Font.ITALIC, 15));
+        layout.putConstraint(SpringLayout.WEST, format, 5, SpringLayout.WEST, container);
+        layout.putConstraint(SpringLayout.NORTH, format, 180, SpringLayout.NORTH, container);
+
         add(format);
 
         addEntry = new JButton("Add Entry");
+        layout.putConstraint(SpringLayout.WEST, addEntry, 50, SpringLayout.WEST, container);
+        layout.putConstraint(SpringLayout.NORTH, addEntry,  200, SpringLayout.NORTH, container);
         addEntry.setFont(font);
         close = new JButton("Close");
+        layout.putConstraint(SpringLayout.WEST, close, 200, SpringLayout.WEST, container);
+        layout.putConstraint(SpringLayout.NORTH, close,  200, SpringLayout.NORTH, container);
         close.setFont(font);
         add(addEntry);
         addEntry.addActionListener(this);
         add(close);
         close.addActionListener(this);
 
-        setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        pack();
+        setLayout(layout);
         setVisible(true);
-        setSize(390,350);
+        setSize(350,350);
     }
 
 
