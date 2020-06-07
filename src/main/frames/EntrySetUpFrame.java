@@ -245,6 +245,7 @@ public class EntrySetUpFrame extends JFrame implements ActionListener {
             data.estimateDurations();
             dispose();
             EntrySetUpFrame newEntry = new EntrySetUpFrame(data);
+            MessageFrame addedMsg = new MessageFrame("New entry has been added to data.");
         } catch (InvalidTimeException ex) {
             TimeErrorFrame errorFrame = new TimeErrorFrame();
         }

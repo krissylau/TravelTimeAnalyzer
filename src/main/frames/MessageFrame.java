@@ -5,12 +5,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class NullSelectionFrame extends JFrame implements ActionListener {
+public class MessageFrame extends JFrame implements ActionListener {
     JButton close;
 
-    public NullSelectionFrame() {
+    public MessageFrame(String msg) {
         Font font = new Font("Segoe UI Emoji", Font.PLAIN, 18);
-        JLabel message = new JLabel("Please ensure you have made a selection in each box.");
+        JLabel message = new JLabel(msg);
         message.setFont(font);
         add(message);
 
