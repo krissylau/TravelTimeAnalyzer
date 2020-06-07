@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 
 public class EntrySetUpFrame extends JFrame implements ActionListener {
     private Data data;
@@ -220,6 +221,19 @@ public class EntrySetUpFrame extends JFrame implements ActionListener {
             endHour = (String) box.getSelectedItem();
         }
         if (e.getSource() == addEntry) {
+            ArrayList<JComboBox> boxes = new ArrayList<>();
+            boxes.add(weatherBox);
+            boxes.add(startHourBox);
+            boxes.add(startMinBox);
+            boxes.add(endMinBox);
+            boxes.add(endHourBox);
+            for(JComboBox b: boxes) {
+                if(b.getSelectedIndex() == 0) {
+                    String message = "Please ensure you have made a selection in each box.";
+                    MessageFrame nullFrame = new MessageFrame(message);
+                    break;
+                }
+            }
             entrySetUp();
         }
         if (e.getSource() == close) {

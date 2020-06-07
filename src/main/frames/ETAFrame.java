@@ -168,7 +168,7 @@ public class ETAFrame extends JFrame implements ActionListener {
             if (weatherBox.getSelectedIndex() == 0 || minBox.getSelectedIndex() == 0 ||
                     hourBox.getSelectedIndex() == 0) {
                 String message = "Please ensure you have made a selection in each box.";
-                MessageFrame nullFrame = new main.frames.MessageFrame(message);
+                MessageFrame nullFrame = new MessageFrame(message);
             }
             String time = hour + ":" + min;
             ResultFrame resultFrame = new ResultFrame(message, time, data);
